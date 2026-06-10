@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Silver Lining — Fantasy Arena Combat in Zero Gravity</title>
+<meta name="description" content="Project Silver Lining is a multiplayer VR arena game — fantasy combat in zero gravity, built in Unreal Engine 5 by MetaForge. Join the crew.">
+<meta property="og:title" content="Project Silver Lining">
+<meta property="og:description" content="Fantasy arena combat in zero gravity. In development for VR.">
+<meta property="og:image" content="assets/SL_warrior_class_shop.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --canvas: #b5a99c;          /* the art-sheet taupe */
+  --canvas-deep: #a4978a;
+  --ink: #2c2320;
+  --maroon: #5e2226;          /* concept-sheet title red */
+  --teal: #1f9d90;            /* mana */
+  --teal-deep: #16766d;
+  --brass: #a87b2f;           /* oracle stones, dome framework */
+  --coral: #d4766a;           /* the Great Tree canopy */
+  --paper: #c2b7aa;
+  --paper-light: #cfc5b9;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font: 17px/1.65 "Inter", -apple-system, sans-serif;
+}
+
+/* ---------- Nav ---------- */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px;
+  background: color-mix(in srgb, var(--canvas) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+}
+.wordmark {
+  font-family: "Fraunces", serif; font-weight: 700;
+  letter-spacing: .42em; font-size: 14px; text-transform: uppercase;
+  color: var(--maroon); text-decoration: none;
+}
+nav .links a {
+  color: var(--ink); text-decoration: none; font-weight: 600;
+  font-size: 14px; letter-spacing: .06em; margin-left: 26px;
+}
+nav .links a:hover { color: var(--maroon); }
+nav .links a.cta {
+  color: #fff; background: var(--maroon);
+  padding: 9px 18px; border-radius: 999px;
+}
+nav .links a.cta:hover { background: #4a1a1d; }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; }
+.hero img {
+  width: 100%; display: block; min-height: 480px; object-fit: cover;
+}
+.hero .veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--canvas) 2%, transparent 38%),
+              linear-gradient(to bottom, color-mix(in srgb, var(--ink) 28%, transparent), transparent 32%);
+}
+.hero .title {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 24px;
+}
+.hero .kicker {
+  letter-spacing: .5em; font-size: 12px; font-weight: 600; text-transform: uppercase;
+  color: #f4ece1; text-shadow: 0 1px 14px rgba(20,12,8,.8);
+}
+.hero h1 {
+  font-family: "Fraunces", serif; font-weight: 700;
+  font-size: clamp(40px, 8vw, 96px); line-height: 1.04;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #f8f1e6; text-shadow: 0 2px 26px rgba(20,12,8,.85);
+  margin: 14px 0 18px;
+}
+.hero .tag {
+  font-size: clamp(16px, 2.4vw, 21px); font-weight: 500;
+  color: #f1e7d8; text-shadow: 0 1px 12px rgba(20,12,8,.85); max-width: 640px;
+}
+.hero .badges { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.badge {
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: #f4ece1; border: 1px solid rgba(244,236,225,.55); border-radius: 999px;
+  padding: 7px 16px; backdrop-filter: blur(4px); background: rgba(30,20,14,.25);
+}
+
+/* ---------- Sections ---------- */
+section { max-width: 1060px; margin: 0 auto; padding: 84px 28px; }
+.section-kicker {
+  letter-spacing: .4em; font-size: 12px; font-weight: 700; text-transform: uppercase;
+  color: var(--teal-deep);
+}
+h2 {
+  font-family: "Fraunces", serif; font-weight: 700;
+  font-size: clamp(30px, 4.6vw, 44px); letter-spacing: .04em;
+  color: var(--maroon); margin: 10px 0 22px;
+}
+p.lead { font-size: 19px; max-width: 760px; }
+.rule { border: none; border-top: 1px solid color-mix(in srgb, var(--ink) 16%, transparent); margin: 0 28px; }
+
+/* ---------- About ---------- */
+.about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 44px; align-items: center; margin-top: 8px; }
+.about-grid img { width: 100%; border-radius: 14px; box-shadow: 0 18px 50px rgba(30,20,14,.35); }
+@media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Game ---------- */
+.feature { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; margin-top: 44px; }
+.feature:nth-child(even of .feature) .art { order: 2; }
+.feature .art img { width: 100%; border-radius: 14px; box-shadow: 0 18px 50px rgba(30,20,14,.35); }
+.feature h3 {
+  font-family: "Fraunces", serif; font-size: 26px; color: var(--ink);
+  margin-bottom: 10px; letter-spacing: .02em;
+}
+.feature .mini {
+  letter-spacing: .3em; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  color: var(--brass); display: block; margin-bottom: 8px;
+}
+@media (max-width: 800px) { .feature { grid-template-columns: 1fr; } .feature .art { order: 0 !important; } }
+
+.pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+.pillar {
+  background: var(--paper); border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  border-radius: 14px; padding: 20px;
+}
+.pillar .num { font-family: "Fraunces", serif; font-size: 22px; color: var(--teal-deep); font-weight: 700; }
+.pillar h4 { font-size: 14px; letter-spacing: .04em; margin: 6px 0 6px; }
+.pillar p { font-size: 13.5px; color: color-mix(in srgb, var(--ink) 78%, transparent); }
+@media (max-width: 800px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+
+.classes { margin-top: 56px; text-align: center; }
+.classes img { width: 100%; border-radius: 14px; box-shadow: 0 18px 50px rgba(30,20,14,.35); }
+.class-names {
+  display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin-top: 18px;
+  font-family: "Fraunces", serif; letter-spacing: .24em; font-size: 14px;
+  text-transform: uppercase; color: var(--maroon); font-weight: 700;
+}
+
+/* ---------- Join ---------- */
+#join { max-width: 880px; }
+.roles { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 36px; }
+.role {
+  font-size: 13px; font-weight: 600; letter-spacing: .05em;
+  background: var(--paper-light); border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  padding: 8px 16px; border-radius: 999px;
+}
+form {
+  background: var(--paper); border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  border-radius: 18px; padding: 30px; box-shadow: 0 16px 44px rgba(30,20,14,.22);
+}
+.field { margin-bottom: 18px; }
+label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--maroon); margin-bottom: 7px; }
+input, select, textarea {
+  width: 100%; font: 16px "Inter", sans-serif; color: var(--ink);
+  background: var(--paper-light); border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: 10px; padding: 12px 14px; outline: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 22%, transparent); }
+input[type=file] { padding: 9px; background: transparent; border-style: dashed; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+button {
+  font: 700 15px "Inter", sans-serif; letter-spacing: .1em; text-transform: uppercase;
+  color: #fff; background: var(--maroon); border: none; border-radius: 999px;
+  padding: 15px 34px; cursor: pointer; margin-top: 6px;
+}
+button:hover { background: #4a1a1d; }
+.fine { font-size: 13px; color: color-mix(in srgb, var(--ink) 70%, transparent); margin-top: 14px; }
+
+footer {
+  text-align: center; padding: 44px 24px 56px;
+  font-size: 13px; color: color-mix(in srgb, var(--ink) 64%, transparent);
+}
+footer .fm { font-family: "Fraunces", serif; letter-spacing: .4em; text-transform: uppercase; font-size: 12px; color: var(--maroon); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="#top">Silver Lining</a>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#game">The Game</a>
+    <a class="cta" href="#join">Join the Crew</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img src="assets/SL_warrior_class_shop.jpg" alt="The Warrior Class Shop — concept art by Jaden Bria">
+  <div class="veil"></div>
+  <div class="title">
+    <div class="kicker">MetaForge Presents</div>
+    <h1>Project<br>Silver Lining</h1>
+    <p class="tag">Fantasy arena combat in zero gravity. A social VR world where every match begins in a tavern and ends in the stars.</p>
+    <div class="badges">
+      <span class="badge">In Development</span>
+      <span class="badge">Built for VR</span>
+      <span class="badge">Unreal Engine 5</span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="section-kicker">About Us</div>
+  <h2>A small forge with a big fire</h2>
+  <div class="about-grid">
+    <div>
+      <p class="lead">MetaForge is an independent studio founded by Landon Rowles and Collin Bria — builders first, with a simple conviction: VR's best moments are <em>social</em>, and the next great VR game will be a place people want to <em>be</em>, not just a thing they play.</p>
+      <p style="margin-top:16px">We work small and ship real: hand-painted concept art, Unreal Engine 5, and a production pipeline that goes from sketch to playable space fast. Every piece of the world — from the bazaar shops to the Great Tree — is designed by hand, built to be readable in VR, and warm enough to come home to.</p>
+    </div>
+    <img src="assets/SL_GH_color1.jpg" alt="The Great Tree dome — concept art">
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="game">
+  <div class="section-kicker">The Game</div>
+  <h2>Laser tag, reborn as fantasy — in zero&nbsp;G</h2>
+  <p class="lead">Aboard the <em>Silver Lining</em> — a magical vessel sailing the stars — adventurers gather in a warm tavern hub, swear themselves to a class, and step through portals into zero-gravity arenas where teams of five battle for glory. Push off walls. Ride your momentum. Win with your friends.</p>
+
+  <div class="feature">
+    <div class="art"><img src="assets/SL_Class_final.jpg" alt="Class selection statues — Assassin, Wizard, Warrior, Cleric, Ranger"></div>
+    <div>
+      <span class="mini">Choose Your Class</span>
+      <h3>Five classes. One ritual.</h3>
+      <p>No menus — you choose who you are at the Statue Hall, by hand. Warrior, Wizard, Cleric, Ranger, Assassin: each with a light move, a heavy move, and an ultimate. Easy to learn. A lifetime to master.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="art"><img src="assets/SL_V4_temp.jpg" alt="The Great Hall hub layout — concept schematic"></div>
+    <div>
+      <span class="mini">The Signature Mechanic</span>
+      <h3>Frozen, never fallen</h3>
+      <p>Nobody dies in the Silver Lining's arenas — the defeated freeze. And frozen teammates are <em>part of the battlefield</em>: carry them as shields, hurl them across the arena, or throw them behind enemy lines so they thaw exactly where the fight needs them. Defeat isn't a timeout. It's a tactic.</p>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar"><div class="num">I</div><h4>Social First</h4><p>The hub is the heart. Matches are what friends do together between conversations.</p></div>
+    <div class="pillar"><div class="num">II</div><h4>No Menus</h4><p>Everything is physical — oracle stones, statues, rituals. The world is the interface.</p></div>
+    <div class="pillar"><div class="num">III</div><h4>Readable Combat</h4><p>Stylized and clear by design. If it hurts clarity, it doesn't ship.</p></div>
+    <div class="pillar"><div class="num">IV</div><h4>No Pay-to-Win</h4><p>Cosmetics are identity, never advantage. Skill is the only currency that wins.</p></div>
+  </div>
+
+  <div class="classes">
+    <div class="class-names">
+      <span>Warrior</span><span>Wizard</span><span>Cleric</span><span>Ranger</span><span>Assassin</span>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="join">
+  <div class="section-kicker">Join the Crew</div>
+  <h2>Help us build the Silver Lining</h2>
+  <p class="lead">We're a small team with a locked art bible, a playable pipeline, and room at the table. If stylized worlds, VR, and ambitious multiplayer make you lean forward — we want to see your work.</p>
+
+  <div class="roles">
+    <span class="role">Environment Artists</span>
+    <span class="role">Character Artists</span>
+    <span class="role">UE5 Engineers</span>
+    <span class="role">VR Interaction Designers</span>
+    <span class="role">Animators</span>
+    <span class="role">Sound Designers</span>
+    <span class="role">Something else? Convince us.</span>
+  </div>
+
+  <form action="https://formsubmit.co/rowlesreels@gmail.com" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="Silver Lining — New Application">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+
+    <div class="two">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" required placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required placeholder="you@example.com">
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="field">
+        <label for="discipline">Discipline</label>
+        <select id="discipline" name="discipline" required>
+          <option value="" disabled selected>Choose one…</option>
+          <option>Environment Art</option>
+          <option>Character Art</option>
+          <option>Concept Art</option>
+          <option>UE5 Engineering</option>
+          <option>VR Interaction Design</option>
+          <option>Animation</option>
+          <option>Sound / Music</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="portfolio">Portfolio Link</label>
+        <input id="portfolio" type="url" name="portfolio" required placeholder="https://artstation.com/you">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="links">Other Links (LinkedIn, GitHub, itch.io…)</label>
+      <input id="links" type="text" name="other_links" placeholder="Optional, comma-separated">
+    </div>
+
+    <div class="field">
+      <label for="resume">Resume (PDF)</label>
+      <input id="resume" type="file" name="attachment" accept="application/pdf">
+    </div>
+
+    <div class="field">
+      <label for="message">Why Silver Lining?</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Tell us what you'd bring aboard — and what you'd want to build first."></textarea>
+    </div>
+
+    <button type="submit">Send Application</button>
+    <p class="fine">Applications go straight to the founders. We read everything; we reply to the ones that make us lean forward.</p>
+  </form>
+</section>
+
+<footer>
+  <div class="fm">Silver Lining</div>
+  © 2026 MetaForge LLC · Concept art by Jaden Bria · All content subject to change — it's in development, that's the fun part.
+</footer>
+
+</body>
+</html>

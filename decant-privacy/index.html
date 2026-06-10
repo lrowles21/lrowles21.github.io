@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decant — Privacy Policy</title>
+<style>
+  :root {
+    --bg: #121012;
+    --surface: #1f1a1c;
+    --text: #f5f0e6;
+    --muted: #b3a99e;
+    --gold: #d4b06b;
+    --wine: #801a29;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 56px 24px 96px; }
+  h1, h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  h1 { font-size: 2.1em; margin-bottom: 0.2em; }
+  h1 .brand { color: var(--gold); }
+  h2 { font-size: 1.35em; margin-top: 2.2em; border-bottom: 1px solid #332a2d; padding-bottom: 0.3em; }
+  .updated { color: var(--muted); font-size: 0.9em; margin-bottom: 2.5em; }
+  p, li { color: var(--text); }
+  .muted { color: var(--muted); }
+  ul { padding-left: 1.3em; }
+  li { margin-bottom: 0.5em; }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .card {
+    background: var(--surface);
+    border: 1px solid #332a2d;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 1.5em 0;
+  }
+  .rule { height: 3px; width: 64px; background: var(--wine); border-radius: 2px; margin: 0 0 2em; }
+  footer { color: var(--muted); font-size: 0.85em; margin-top: 4em; border-top: 1px solid #332a2d; padding-top: 1.5em; }
+</style>
+</head>
+<body>
+<main>
+  <h1><span class="brand">Decant</span> — Privacy Policy</h1>
+  <p class="updated">Effective date: June 10, 2026</p>
+  <div class="rule"></div>
+
+  <p>Decant is a wine journal for iOS, made by Landon Rowles. This policy explains what
+  the app stores, where it goes, and what never happens with it. The short version: your
+  tasting notes are yours, we don't know who you are, and nothing is sold or used for
+  advertising.</p>
+
+  <h2>No account, no identity</h2>
+  <p>Decant has no sign-up, no login, and no profile form. When you first open the app,
+  Firebase Authentication creates an <strong>anonymous session</strong> — a random
+  identifier with no name, email, phone number, or any other personal detail attached.
+  We cannot identify you from it, and neither can anyone else.</p>
+
+  <h2>What the app stores</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Tasting notes</strong> — the wines you log, your 0–100 ratings, written
+      notes, venue names you type, and timestamps.</li>
+      <li><strong>Photos</strong> — only the photos you choose to attach to a note, via
+      the system photo picker. The app never accesses your photo library beyond the
+      images you explicitly select.</li>
+      <li><strong>Wines you add</strong> — if you create a wine that isn't in the
+      built-in catalog, its details (producer, varietal, region) are stored.</li>
+    </ul>
+  </div>
+  <p>This data is saved to Google Firebase (Cloud Firestore for notes and Firebase
+  Storage for photos), associated with your anonymous identifier so it can be backed up.
+  Firebase acts as our data processor; its handling of data is governed by
+  <a href="https://firebase.google.com/support/privacy" rel="noopener">Google's Firebase
+  privacy documentation</a>. Like most internet services, Firebase processes IP
+  addresses transiently to deliver the service.</p>
+
+  <h2>What the app does <em>not</em> do</h2>
+  <div class="card">
+    <ul>
+      <li>No analytics or behavioral tracking SDKs.</li>
+      <li>No advertising, and no advertising identifiers.</li>
+      <li>No location collection.</li>
+      <li>No access to contacts, calendars, microphone, or camera roll beyond the photos
+      you pick.</li>
+      <li>No sale, rental, or sharing of your data with third parties — ever.</li>
+    </ul>
+  </div>
+
+  <h2>Note visibility</h2>
+  <p>Each note has a Public/Private setting. Private notes are visible only within your
+  own app. The public setting exists to support future social features; today, no other
+  user can browse your notes.</p>
+
+  <h2>Data retention &amp; deletion</h2>
+  <p>Your notes and photos are kept so your journal persists. Because sessions are
+  anonymous, deleting the app from your device orphans the data permanently — nobody can
+  connect it back to you. If you want your data actively deleted from our servers, email
+  <a href="mailto:rowlesreels@gmail.com">rowlesreels@gmail.com</a> from within the app's
+  support flow (or with your approximate first-use date so we can locate the records)
+  and it will be removed.</p>
+
+  <h2>Age</h2>
+  <p>Decant is about wine and is intended for users of legal drinking age in their
+  country. It is rated 18+ on the App Store and is not directed at children.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If Decant's data practices change — for example, if optional accounts or social
+  features launch — this page will be updated and the effective date revised before the
+  change ships.</p>
+
+  <h2>Contact</h2>
+  <p>Questions, concerns, or deletion requests:
+  <a href="mailto:rowlesreels@gmail.com">rowlesreels@gmail.com</a></p>
+
+  <footer>
+    Decant — a wine journal by Landon Rowles. &copy; 2026.
+  </footer>
+</main>
+</body>
+</html>
