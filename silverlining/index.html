@@ -276,7 +276,7 @@ footer .fm { font-family: "Fraunces", serif; letter-spacing: .4em; text-transfor
     <span class="role">Something else? Convince us.</span>
   </div>
 
-  <form action="https://formsubmit.co/rowlesreels@gmail.com" method="POST" enctype="multipart/form-data">
+  <form id="apply" action="https://formsubmit.co/landon@metaforgevr.com" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="_subject" value="Silver Lining — New Application">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -333,6 +333,35 @@ footer .fm { font-family: "Fraunces", serif; letter-spacing: .4em; text-transfor
     <p class="fine">Applications go straight to the founders. We read everything; we reply to the ones that make us lean forward.</p>
   </form>
 </section>
+
+<script>
+// Mirror each application (sans attachment) into Firestore so the studio's
+// daily briefing can report new applicants. Best-effort — never blocks the
+// email submission.
+document.getElementById("apply").addEventListener("submit", function () {
+  try {
+    const f = this;
+    const val = (n) => (f.elements[n] ? f.elements[n].value : "");
+    if (val("_honey")) return;
+    const doc = {
+      fields: {
+        name:       { stringValue: val("name") },
+        email:      { stringValue: val("email") },
+        discipline: { stringValue: val("discipline") },
+        portfolio:  { stringValue: val("portfolio") },
+        links:      { stringValue: val("other_links") },
+        message:    { stringValue: val("message").slice(0, 2000) },
+        submittedAt:{ timestampValue: new Date().toISOString() }
+      }
+    };
+    const blob = new Blob([JSON.stringify(doc)], { type: "application/json" });
+    navigator.sendBeacon(
+      "https://firestore.googleapis.com/v1/projects/decant-6ec62/databases/(default)/documents/silverlining_applications?key=AIzaSyCFllW9xy1svAuwEpVvuCa43e0MPKTuX70",
+      blob
+    );
+  } catch (e) { /* email path still proceeds */ }
+});
+</script>
 
 <footer>
   <div class="fm">Silver Lining</div>
