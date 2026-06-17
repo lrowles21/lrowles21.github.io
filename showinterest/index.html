@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Show Interest · Nashville dating built on what you're into</title>
+<meta name="description" content="Tired of swiping on photos and getting nowhere? Show Interest matches you on what you actually like, so the conversation goes somewhere. Join the Nashville waitlist." />
+<meta property="og:title" content="Show Interest: built on what you're actually into" />
+<meta property="og:description" content="Nashville's dating app for people who actually want to date. Join the waitlist." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF6EF; --ink:#211C24; --muted:#6F6770;
+    --berry:#C8455B; --berry-dark:#A5324A; --plum:#3D2A40; --gold:#E0A458;
+    --line:#E7DDD2; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.1;letter-spacing:-.01em}
+  .serif{font-family:'Fraunces',serif}
+
+  header{padding:54px 0 18px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--berry-dark);
+         background:#F6E6E2;border:1px solid #E9CFC9;border-radius:999px;padding:6px 14px;letter-spacing:.02em}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:23px;margin-bottom:30px;letter-spacing:-.02em}
+  .logo span{color:var(--berry)}
+  h1{font-size:clamp(34px,7vw,52px);margin:14px 0 16px}
+  h1 em{font-style:italic;color:var(--berry)}
+  .sub{font-size:clamp(17px,2.4vw,20px);color:var(--muted);max-width:540px;margin:0 auto}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;margin:30px auto 0;
+        box-shadow:0 18px 50px -28px rgba(33,28,36,.45)}
+  .card h3{font-size:21px;margin-bottom:4px}
+  .card .hint{font-size:14px;color:var(--muted);margin-bottom:18px}
+  label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px}
+  input[type=email]{width:100%;font-size:16px;font-family:inherit;padding:14px 16px;border:1.5px solid var(--line);
+        border-radius:13px;background:#FCFAF7;color:var(--ink);transition:border-color .15s}
+  input[type=email]:focus{outline:none;border-color:var(--berry)}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .chip{font-size:14px;font-weight:500;border:1.5px solid var(--line);background:#FCFAF7;color:var(--ink);
+        border-radius:999px;padding:9px 15px;cursor:pointer;user-select:none;transition:all .12s}
+  .chip:hover{border-color:#D8C9BB}
+  .chip.on{background:var(--berry);border-color:var(--berry);color:#fff}
+  .chip.has{background:#F6E6E2;border-color:#E9CFC9;color:var(--berry-dark)}
+  .chip.active{border-color:var(--berry)}
+  .chip b{font-weight:700}
+  .subpanel{margin-top:14px;padding:15px;border:1.5px dashed var(--line);border-radius:14px;background:#FCFAF7;display:none}
+  .subpanel.show{display:block}
+  .subpanel .q{font-family:'Fraunces',serif;font-size:16px;font-weight:600;margin-bottom:11px}
+  .cta{width:100%;margin-top:22px;font-size:17px;font-weight:600;font-family:inherit;color:#fff;
+       background:var(--berry);border:none;border-radius:13px;padding:16px;cursor:pointer;transition:background .15s}
+  .cta:hover{background:var(--berry-dark)}
+  .cta:disabled{opacity:.55;cursor:default}
+  .fineprint{font-size:12.5px;color:var(--muted);text-align:center;margin-top:12px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .err{color:var(--berry-dark);font-size:14px;margin-top:10px;text-align:center;min-height:18px}
+
+  section{padding:46px 0}
+  .eyebrow{text-align:center;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--berry);margin-bottom:10px}
+  h2{font-size:clamp(26px,4.5vw,34px);text-align:center;margin-bottom:30px}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+        border-radius:18px;padding:20px;margin-bottom:14px}
+  .num{flex:none;width:38px;height:38px;border-radius:50%;background:#F6E6E2;color:var(--berry-dark);
+       font-family:'Fraunces',serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .step h3{font-size:18px;margin-bottom:3px}
+  .step p{font-size:15px;color:var(--muted)}
+
+  .promise{background:var(--plum);color:#F4ECEF;border-radius:24px;padding:40px 28px;text-align:center;margin:8px auto}
+  .promise h2{color:#fff;margin-bottom:12px}
+  .promise p{color:#D8C7CE;max-width:480px;margin:0 auto;font-size:17px}
+  .promise .feels{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:var(--gold);margin-top:18px}
+
+  footer{text-align:center;padding:40px 0 60px;color:var(--muted);font-size:13.5px}
+  footer a{color:var(--berry-dark)}
+
+  #thanks{display:none;text-align:center}
+  #thanks.show{display:block}
+  .refbox{display:flex;gap:8px;margin-top:16px}
+  .refbox input{flex:1;font-size:14px;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;background:#FCFAF7;color:var(--ink)}
+  .refbox button{font-weight:600;font-family:inherit;background:var(--ink);color:#fff;border:none;border-radius:11px;padding:0 18px;cursor:pointer}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">Show <span>Interest</span></div>
+      <div class="badge">📍 Coming to Nashville first</div>
+      <h1>Dating for people who actually want to <em>talk.</em></h1>
+      <p class="sub">Swiping on photos and getting nowhere? Show Interest sets you up with people who like the same stuff you do, so you actually have something to say to each other.</p>
+    </header>
+
+    <div class="card" id="form">
+      <div id="intro">
+      <h3>Join the Nashville waitlist</h3>
+      <p class="hint">First access when we launch. Tell us a bit about what you're into so you hit the ground running.</p>
+
+      <form id="signup" autocomplete="off">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@email.com" required />
+
+        <label>What are you into? <span style="color:var(--muted);font-weight:400">(tap one to go deeper)</span></label>
+        <div class="chips" id="chips"></div>
+        <div class="subpanel" id="subpanel">
+          <div class="q" id="subq"></div>
+          <div class="chips" id="subchips"></div>
+        </div>
+
+        <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <button class="cta" type="submit" id="submit">Save my spot</button>
+        <div class="err" id="err"></div>
+        <p class="fineprint">Nashville, 18+. We'll let you know the day it opens. No spam.</p>
+      </form>
+      </div>
+
+      <div id="thanks">
+        <h3 class="serif">You're on the list. 🎉</h3>
+        <p class="hint" style="margin-top:6px">We'll reach out the day Show Interest opens in Nashville.</p>
+        <p style="font-size:15px;margin-top:16px"><strong>Want in sooner?</strong> Every friend you bring bumps you up the line.</p>
+        <div class="refbox">
+          <input type="text" id="reflink" readonly />
+          <button id="copy">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="eyebrow">How it works</div>
+      <h2>You unlock each other by talking.</h2>
+      <div class="step"><div class="num">1</div><div><h3>Their interests start hidden.</h3><p>You'll see their photos and one or two things they're into. Everyone who shows up has at least one in common with you.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Talk about it.</h3><p>Skip the awkward "hey." You already share something, so there's a real conversation sitting right there.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Both hit Show Interest.</h3><p>When you both tap it, the next thing you have in common shows up. The more you talk, the more you find out about each other.</p></div></div>
+    </section>
+
+    <div class="promise">
+      <h2>Everyone here is at least a little bit your people.</h2>
+      <p>The more you share, the better it gets. It starts with one thing in common and turns into "okay, how do we have this much in common?"</p>
+      <p class="feels">It's the "no way, you too?" feeling, on repeat.</p>
+    </div>
+
+    <footer>
+      Show Interest · made for Nashville · <a href="#form">Join the waitlist</a><br>
+      <span style="opacity:.7">© 2026 · 18+</span>
+    </footer>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Firebase web config (public by design; the waitlist is protected by rules).
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGioQg7_cJuwZtDFSp3s6ov_-OKAoLZ8w",
+    authDomain: "showinterest-253eb.firebaseapp.com",
+    projectId: "showinterest-253eb",
+    storageBucket: "showinterest-253eb.firebasestorage.app",
+    messagingSenderId: "489002429376",
+    appId: "1:489002429376:web:13321ba2e50df996f67625",
+    measurementId: "G-MZ2HYV82SQ"
+  };
+
+  // Two-level interests: a category opens a follow-up question with specifics.
+  const INTERESTS = {
+    "Live music": ["Catching shows","I play an instrument","Songwriting","Country","Indie","Hip-hop","Bluegrass","Rock","R&B","Pop","EDM","Jazz","Open mics","Festivals","Vinyl collecting"],
+    "Cooking":    ["Pasta","BBQ","Baking","Brunch","Cocktails","Grilling","Sourdough","Sushi","Tacos","Smoking meats","Desserts","Meal prep","Hosting dinners","Trying new recipes"],
+    "Coffee":     ["Pour-over","Espresso","Iced everything","Cold brew","Lattes","Local roasters","Matcha","More of a tea person","Cafe hopping","Just the caffeine"],
+    "Outdoors":   ["Hiking","Camping","Running","Climbing","Lake days","Golf","Kayaking","Mountain biking","Fishing","Backpacking","Skiing/snowboarding","Tennis"],
+    "Foodie":     ["New spots","Hole-in-the-wall","Hot chicken","Tacos","Sushi","Pizza","BBQ","Food trucks","Fine dining","Farmers markets","Vegan/veggie","Dessert runs"],
+    "Fitness":    ["Lifting","Yoga","Running","Pilates","CrossFit","Cycling/spin","Climbing","Boxing","Pickup sports","Hot yoga","Marathons","Just getting started"],
+    "Reading":    ["Fiction","Fantasy","Sci-fi","Non-fiction","Poetry","Thrillers","Romance","Memoirs","History","Self-help","Book clubs","Audiobooks"],
+    "Travel":     ["Road trips","Beaches","Big cities","National parks","Abroad","Weekend getaways","Backpacking","Solo travel","All-inclusive","Foodie trips","Mountains","Camping trips"],
+    "Movies & TV":["Horror","Comedy","Rom-coms","Sci-fi","Anime","True crime","Reality TV","Documentaries","A24 films","Marvel","Sitcoms","Theater dates"],
+    "Gaming":     ["Co-op","RPGs","Switch","Board games","FPS","PC gaming","Indie games","MMOs","Minecraft","Card games","Retro","Mobile games"],
+    "Art":        ["Painting","Photography","Pottery","Drawing","Design","Crafting","Film photography","Tattoos","Galleries","Theater","Making things","Music production"],
+    "Sports":     ["Titans","Predators","College football","NBA","Soccer","MLB","UFC","F1","Golf","Tennis","Rec leagues","Fantasy football"],
+    "Nightlife":  ["Live shows","Dive bars","Dancing","Trivia nights","Wine bars","Rooftops","Speakeasies","Karaoke","Breweries","Comedy shows","Broadway honky-tonks","Game nights"],
+    "Dogs":       ["Have one","Want one","Dog park regular","Big dogs","Small dogs","Foster/rescue","Cat person too","Multiple pets"],
+    "Faith":      ["Church community","Bible study","Small groups","Worship music","Serving","Mission trips","Volunteering","Still exploring it"]
+  };
+  const SUBQ = {
+    "Live music":"What's your scene?", "Cooking":"What do you love to make?",
+    "Coffee":"How do you take it?", "Outdoors":"What gets you outside?",
+    "Foodie":"Where are you eating?", "Fitness":"How do you move?",
+    "Reading":"What's on your shelf?", "Travel":"What's your kind of trip?",
+    "Movies & TV":"What are you watching?", "Gaming":"What do you play?",
+    "Art":"What's your medium?", "Sports":"Who are you into?",
+    "Nightlife":"What's a good night out?", "Dogs":"Dog person, how?",
+    "Faith":"What does that look like?"
+  };
+
+  const chipsEl = document.getElementById("chips");
+  const subPanel = document.getElementById("subpanel");
+  const subQ = document.getElementById("subq");
+  const subChips = document.getElementById("subchips");
+  const chosen = {};
+
+  Object.keys(INTERESTS).forEach(cat => {
+    chosen[cat] = new Set();
+    const c = document.createElement("div");
+    c.className = "chip"; c.dataset.cat = cat; c.textContent = cat;
+    c.onclick = () => openCategory(cat, c);
+    chipsEl.appendChild(c);
+  });
+
+  function refreshCat(cat){
+    const c = chipsEl.querySelector('[data-cat="'+cat+'"]');
+    const n = chosen[cat].size;
+    c.classList.toggle("has", n>0);
+    c.innerHTML = n>0 ? cat + ' <b>· '+n+'</b>' : cat;
+  }
+
+  function openCategory(cat, chipEl){
+    chipsEl.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+    chipEl.classList.add("active");
+    subQ.textContent = SUBQ[cat] || ("What kind of " + cat.toLowerCase() + "?");
+    subChips.innerHTML = "";
+    INTERESTS[cat].forEach(sub => {
+      const s = document.createElement("div");
+      s.className = "chip" + (chosen[cat].has(sub) ? " on" : "");
+      s.textContent = sub;
+      s.onclick = () => {
+        if (chosen[cat].has(sub)) chosen[cat].delete(sub); else chosen[cat].add(sub);
+        s.classList.toggle("on");
+        refreshCat(cat);
+      };
+      subChips.appendChild(s);
+    });
+    subPanel.classList.add("show");
+  }
+
+  const params = new URLSearchParams(location.search);
+  const ref = params.get("ref") || null;
+  let db = null;
+  if (!firebaseConfig.apiKey.includes("PASTE_ME")) {
+    try { db = getFirestore(initializeApp(firebaseConfig)); }
+    catch (e) { console.error("Firebase init failed", e); }
+  }
+  const mintId = () => "w_" + Math.random().toString(36).slice(2,10);
+
+  document.getElementById("signup").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const err = document.getElementById("err");
+    const btn = document.getElementById("submit");
+    err.textContent = "";
+    if (document.getElementById("website").value) return; // honeypot
+    const email = document.getElementById("email").value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = "Enter a valid email."; return; }
+
+    const interests = [];
+    for (const cat in chosen) for (const sub of chosen[cat]) interests.push(cat + ": " + sub);
+
+    btn.disabled = true; btn.textContent = "Saving…";
+    const myRef = mintId();
+    const payload = { id: myRef, email, interests, referredBy: ref,
+                      utm: params.get("utm_source") || null, createdAt: serverTimestamp() };
+    try {
+      if (db) await addDoc(collection(db, "waitlist"), payload);
+      else console.warn("Firebase not configured, signup not persisted:", payload);
+      document.getElementById("reflink").value = location.origin + location.pathname + "?ref=" + myRef;
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("thanks").classList.add("show");
+    } catch (e2) {
+      console.error(e2); err.textContent = "Something went wrong, try again.";
+      btn.disabled = false; btn.textContent = "Save my spot";
+    }
+  });
+
+  document.getElementById("copy").addEventListener("click", () => {
+    const i = document.getElementById("reflink"); i.select();
+    navigator.clipboard.writeText(i.value);
+    document.getElementById("copy").textContent = "Copied!";
+  });
+</script>
+</body>
+</html>
