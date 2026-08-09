@@ -175,6 +175,38 @@ button {
 button:hover { background: #4a1a1d; }
 .fine { font-size: 13px; color: color-mix(in srgb, var(--ink) 70%, transparent); margin-top: 14px; }
 
+/* ---------- Careers ---------- */
+#careers { max-width: 1060px; }
+.jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 34px; }
+@media (max-width: 800px) { .jobs { grid-template-columns: 1fr; } }
+.job {
+  background: var(--paper); border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  border-radius: 18px; padding: 28px; box-shadow: 0 16px 44px rgba(30,20,14,.18);
+  display: flex; flex-direction: column;
+}
+.job .mini {
+  letter-spacing: .3em; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  color: var(--brass); display: block; margin-bottom: 8px;
+}
+.job h3 { font-family: "Fraunces", serif; font-size: 24px; color: var(--maroon); letter-spacing: .02em; margin-bottom: 12px; }
+.job .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.job .tag2 {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--teal-deep); border: 1px solid color-mix(in srgb, var(--teal-deep) 45%, transparent);
+  border-radius: 999px; padding: 5px 12px; background: color-mix(in srgb, var(--teal) 10%, transparent);
+}
+.job p { font-size: 15px; margin-bottom: 14px; }
+.job ul { margin: 0 0 18px 18px; font-size: 14.5px; }
+.job li { margin-bottom: 7px; }
+.job li::marker { color: var(--brass); }
+.job .apply-btn {
+  font: 700 14px "Inter", sans-serif; letter-spacing: .1em; text-transform: uppercase;
+  color: #fff; background: var(--maroon); border: none; border-radius: 999px;
+  padding: 13px 28px; cursor: pointer; text-decoration: none; text-align: center;
+  margin-top: auto; align-self: flex-start;
+}
+.job .apply-btn:hover { background: #4a1a1d; }
+
 footer {
   text-align: center; padding: 44px 24px 56px;
   font-size: 13px; color: color-mix(in srgb, var(--ink) 64%, transparent);
@@ -189,6 +221,8 @@ footer .fm { font-family: "Fraunces", serif; letter-spacing: .4em; text-transfor
   <div class="links">
     <a href="#about">About</a>
     <a href="#game">The Game</a>
+    <a href="#careers">Open Roles</a>
+    <a href="https://metaforge-hq.pages.dev" style="font-size:13px;color:var(--dim);margin-left:22px">Team Login</a>
     <a class="cta" href="#join">Join the Crew</a>
   </div>
 </nav>
@@ -261,6 +295,56 @@ footer .fm { font-family: "Fraunces", serif; letter-spacing: .4em; text-transfor
 
 <hr class="rule">
 
+<section id="careers">
+  <div class="section-kicker">Open Roles</div>
+  <h2>Two seats at the forge — paid contracts</h2>
+  <p class="lead">These are the roles we're actively hiring for right now: real, paid, milestone-based contract work on a game deep in development. Remote-friendly. Portfolio beats resume every time.</p>
+
+  <div class="jobs">
+    <div class="job">
+      <span class="mini">Engineering · Priority Hire</span>
+      <h3>UE5 Multiplayer Engineer</h3>
+      <div class="tags">
+        <span class="tag2">Paid Contract</span>
+        <span class="tag2">Milestone-Based</span>
+        <span class="tag2">Remote</span>
+        <span class="tag2">C++ / UE5</span>
+      </div>
+      <p>Own the networking backbone of a 5v5 VR arena game: sessions and lobbies, server-authoritative replication, and our signature freeze mechanic synced flawlessly across every headset in the match.</p>
+      <ul>
+        <li>EOS (Epic Online Services) sessions, lobbies &amp; matchmaking in UE5</li>
+        <li>Server-authoritative gameplay replication — movement, abilities, match state</li>
+        <li>Replicate the freeze mechanic across all clients, cheat-resistant</li>
+        <li>Hit Quest performance budgets and keep the frame time honest</li>
+      </ul>
+      <p style="font-size:13.5px;color:color-mix(in srgb,var(--ink) 72%, transparent)">We look for: shipped UE multiplayer work you can show running, fluency in replication fundamentals (server authority, RPCs, replicated properties, relevancy), and source-control discipline. VR/Quest experience is a strong plus. Scoped milestones with acceptance builds — you know exactly what done means.</p>
+      <a class="apply-btn" href="#apply" data-role="UE5 Engineering">Apply — Engineering</a>
+    </div>
+
+    <div class="job">
+      <span class="mini">Art · Priority Hire</span>
+      <h3>3D Artist — Environment &amp; Props</h3>
+      <div class="tags">
+        <span class="tag2">Paid Contract</span>
+        <span class="tag2">Per Asset Pack</span>
+        <span class="tag2">Remote</span>
+        <span class="tag2">Stylized / VR</span>
+      </div>
+      <p>Build the world of the <em>Silver Lining</em> from a locked, hand-painted art bible: the tavern hub, the bazaar shops, the Great Tree, and the arenas players fight through in zero gravity.</p>
+      <ul>
+        <li>Model &amp; texture stylized environments and props from existing concept art</li>
+        <li>Work to VR budgets — poly counts, draw calls, texture atlases for Quest</li>
+        <li>Deliver clean, game-ready assets through the UE5 import pipeline</li>
+        <li>Collaborate directly with the founders and our concept artist</li>
+      </ul>
+      <p style="font-size:13.5px;color:color-mix(in srgb,var(--ink) 72%, transparent)">We look for: a portfolio with stylized, hand-painted-friendly work, an understanding of real-time constraints (mobile VR especially), and the ability to match an established style rather than impose one. Paid per scoped asset pack — clear deliverables, no vague hours.</p>
+      <a class="apply-btn" href="#apply" data-role="Environment Art">Apply — 3D Art</a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <section id="join">
   <div class="section-kicker">Join the Crew</div>
   <h2>Help us build the Silver Lining</h2>
@@ -279,6 +363,7 @@ footer .fm { font-family: "Fraunces", serif; letter-spacing: .4em; text-transfor
 
   <form id="apply" action="https://formsubmit.co/landon@metaforgevr.com" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="_subject" value="Silver Lining — New Application">
+    <input type="hidden" name="source" id="source-field" value="website">
     <input type="hidden" name="_cc" value="collin@metaforgevr.com">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -354,6 +439,7 @@ document.getElementById("apply").addEventListener("submit", function () {
         portfolio:  { stringValue: val("portfolio") },
         links:      { stringValue: val("other_links") },
         message:    { stringValue: val("message").slice(0, 2000) },
+        source:     { stringValue: val("source") },
         submittedAt:{ timestampValue: new Date().toISOString() }
       }
     };
@@ -364,6 +450,21 @@ document.getElementById("apply").addEventListener("submit", function () {
     );
   } catch (e) { /* email path still proceeds */ }
 });
+
+// Careers: apply buttons preselect the discipline in the form.
+document.querySelectorAll(".apply-btn[data-role]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var sel = document.getElementById("discipline");
+    if (sel) sel.value = btn.dataset.role;
+  });
+});
+
+// Track where applicants came from (?src=linkedin etc.) for the hiring funnel.
+(function () {
+  var src = new URLSearchParams(location.search).get("src");
+  var f = document.getElementById("source-field");
+  if (src && f) f.value = src.slice(0, 40);
+})();
 </script>
 
 <footer>
